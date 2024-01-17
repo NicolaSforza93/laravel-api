@@ -11,6 +11,11 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::with('type', 'technologies')->get();
+        foreach ($projects as $project) {
+            if ($project->cover_image) {
+                $project->cover_image = 'http://127.0.0.1:8000/storage/' . $project->cover_image;
+            }
+        }
         return response()->json([
             'success' => true,
             'results' => $projects
