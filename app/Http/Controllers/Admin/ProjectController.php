@@ -91,6 +91,7 @@ class ProjectController extends Controller
                 'required',
                 Rule::in(['Completato', 'In corso', 'Non completato'])
             ],
+            'description' => 'nullable|min:5|string',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
             'cover_image' => 'nullable|file|max:2048|mimes:jpg,png'

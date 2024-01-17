@@ -31,7 +31,7 @@
                     </ul>
                     
                     <p>{{ $project->date_creation }}</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta praesentium non, expedita sit veritatis perspiciatis iusto molestias ipsum blanditiis quia ipsam doloremque aperiam animi nemo! Impedit, necessitatibus praesentium! Nemo, quisquam voluptatum nisi quasi voluptas deleniti eius ea, nihil officiis error optio ut impedit tenetur. Quos, ducimus. At aliquid fuga molestias!</p>
+                    <p>{{ $project->description }}</p>
         
                     <button type="button" class="btn btn-primary btn-sm">
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="text-white text-decoration-none">Modifica</a>

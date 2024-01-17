@@ -54,6 +54,11 @@
                 <label for="basic-url" class="form-label text-uppercase">Data Creazione</label>
                 <input type="date" required class="form-control" name="date_creation" value="{{ old('date_creation', $project->date_creation) }}"">
             </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label text-uppercase">Descrizione</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $project->description) }}</textarea>
+            </div>
             
             <button type="submit" class="btn btn-primary">Modifica</button>
                 
