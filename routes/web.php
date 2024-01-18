@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('projects', ProjectController::class);
+        Route::post('/projects/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
     });
 
 Route::middleware(['auth', 'verified'])

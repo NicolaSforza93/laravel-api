@@ -16,11 +16,20 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all()
-            ->sortBy('date_creation');
-        return view('admin.projects.index', compact('projects'));
+        $data = $request->all();
+
+        if ($request->has('trashed')) {
+            $query = Project::onlyTrashed()->get();
+        } else {
+            $query = Project::all()->sortBy('date_creation');
+        }
+
+        $projects = $query;
+        $trashedElements = Project::onlyTrashed()->count();
+
+        return view('admin.projects.index', compact('projects', 'trashedElements'));
     }
 
     /**
@@ -124,10 +133,36 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($project_id)
     {
+        $project = Project::withTrashed()->where('id', $project_id)->first();
+
+        if (!isset($project)) {
+            abort(404);
+        }
+
         $project->technologies()->sync([]);
-        $project->delete();
+
+        if ($project->trashed()) {
+            $project->forceDelete();
+        } else {
+            $project->delete();
+        }
+
+        return redirect()->route('admin.projects.index');
+    }
+
+    public function restore($project_id)
+    {
+        $project = Project::withTrashed()->where('id', $project_id)->first();
+
+        if (!isset($project)) {
+            abort(404);
+        }
+
+        if ($project->trashed()) {
+            $project->restore();
+        }
 
         return redirect()->route('admin.projects.index');
     }
