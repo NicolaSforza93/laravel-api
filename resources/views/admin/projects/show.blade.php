@@ -3,6 +3,14 @@
 @section('content')
 
 <section>
+    @if(session()->has('message_edit'))
+    <div class="container p-2">
+        <div class="alert alert-primary">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ session()->get('message_edit') }}
+        </div>
+    </div>
+    @endif
     <div class="container py-4">
         <div class="row">
             @if ($project->cover_image)

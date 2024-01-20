@@ -25,6 +25,9 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $project->load('type', 'technologies');
+        if ($project->cover_image) {
+            $project->cover_image = 'http://127.0.0.1:8000/storage/' . $project->cover_image;
+        }
 
         return response()->json([
             'success' => true,

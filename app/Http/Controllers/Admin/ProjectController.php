@@ -64,7 +64,7 @@ class ProjectController extends Controller
             $new_project->technologies()->attach($data['technologies']);
         }
 
-        return redirect()->route('admin.projects.index', $new_project->id);
+        return redirect()->route('admin.projects.index', $new_project->id)->with('message_create', "$new_project->name_project aggiunto correttamente");
     }
 
     /**
@@ -127,7 +127,7 @@ class ProjectController extends Controller
             $project->technologies()->sync([]);
         }
 
-        return redirect()->route('admin.projects.show', $project->id);
+        return redirect()->route('admin.projects.show', $project->id)->with('message_edit', "$project->name_project modificato correttamente");
     }
 
     /**
@@ -149,7 +149,7 @@ class ProjectController extends Controller
             $project->delete();
         }
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message_destroy', "$project->name_project eliminato correttamente");
     }
 
     public function restore($project_id)
@@ -164,6 +164,6 @@ class ProjectController extends Controller
             $project->restore();
         }
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message_restore', "$project->name_project ripristinato");
     }
 }

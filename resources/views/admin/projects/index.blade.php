@@ -3,6 +3,28 @@
 @section('content')
 
 <section>
+    @if(session()->has('message_create'))
+    <div class="container p-2">
+        <div class="alert alert-success">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ session()->get('message_create') }}
+        </div>
+    </div>
+    @elseif(session()->has('message_destroy'))
+    <div class="container p-2">
+        <div class="alert alert-danger">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ session()->get('message_destroy') }}
+        </div>
+    </div>
+    @elseif(session()->has('message_restore'))
+    <div class="container p-2">
+        <div class="alert alert-success">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ session()->get('message_restore') }}
+        </div>
+    </div>
+    @endif
     <div class="container py-4">
         <h1>Progetti realizzati</h1>
         <table class="table table-striped table-hover">
